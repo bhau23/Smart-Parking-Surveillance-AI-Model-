@@ -1,0 +1,61 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Environments
+.env
+.venv
+venv/
+ENV/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Project specific
+dataset/parking/clf-data/*
+model/*.p
+weights/*.pt
+temp/*
+validation_results/*.webm
+
+# Keep these files
+!dataset/parking/clf-data/.gitkeep
+!model/.gitkeep
+!weights/.gitkeep
+!temp/.gitkeep
+
+# Fall detection (separate repository)
+/fall_detection/
+
+# Large files
+*.mp4
+*.avi
+*.mov
+*.webm
+!validation_results/streamlit-app-2025-04-10-04-04-64.webm  # Keep UI demo video
+
+# Temporary files
+*.log
+*.tmp

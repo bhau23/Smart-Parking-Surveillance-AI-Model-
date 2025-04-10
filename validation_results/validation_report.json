@@ -1,0 +1,31 @@
+{
+  "timestamp": "2025-04-10T00:47:43.294412",
+  "metrics": {
+    "accuracy": 0.9747474747474747,
+    "precision": 0.9242424242424242,
+    "recall": 1.0,
+    "f1_score": 0.9606299212598425,
+    "confusion_matrix": [
+      [
+        264,
+        10
+      ],
+      [
+        0,
+        122
+      ]
+    ],
+    "average_confidence": 0.5429922505132515,
+    "average_processing_time": 1.6242358684539795,
+    "fps": 0.6156741267829806
+  },
+  "plots": {
+    "confusion_matrix": "validation_results\\confusion_matrix.png"
+  },
+  "summary": {
+    "total_frames": 1,
+    "total_predictions": 1,
+    "total_spaces_validated": 396,
+    "validation_passed": true
+  }
+}
