@@ -39,15 +39,16 @@ model/*.p
 weights/*.pt
 temp/*
 validation_results/*.webm
+FALL_DETECTION/**/*.pt  # Ignore model weights
+FALL_DETECTION/**/events.out.tfevents.*  # Ignore tensorboard files
 
 # Keep these files
 !dataset/parking/clf-data/.gitkeep
 !model/.gitkeep
 !weights/.gitkeep
 !temp/.gitkeep
-
-# Fall detection (separate repository)
-/fall_detection/
+!FALL_DETECTION/fall_detection_assignment/scripts/  # Keep Python scripts
+!FALL_DETECTION/fall_detection_assignment/demo_videos/  # Keep demo videos
 
 # Large files
 *.mp4
@@ -55,6 +56,7 @@ validation_results/*.webm
 *.mov
 *.webm
 !validation_results/streamlit-app-2025-04-10-04-04-64.webm  # Keep UI demo video
+!FALL_DETECTION/fall_detection_assignment/demo_videos/videoplayback.mp4  # Keep fall detection demo
 
 # Temporary files
 *.log
