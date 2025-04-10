@@ -6,46 +6,44 @@ This project implements two main components as part of the Smart Parking & Surve
 
 2. Fall Detection: YOLO-based human action recognition system that detects fall incidents in surveillance footage.
 
-Both components are documented below with their respective implementations and results.
-
-[View Project Status and Task Completion Details](PROJECT_STATUS.md)
-
 ## Performance Metrics
 
-- **Accuracy**: 97.47% (exceeds 90% requirement)
+### Parking Detection
+- **Accuracy**: 97.47% (exceeds required 90%)
 - **Precision**: 92.42%
 - **Recall**: 100.00%
 - **Processing Speed**: 0.61 FPS
 - [Detailed Analysis](validation_results/analysis.md)
 
+### Fall Detection
+- Implemented using custom-trained YOLO model
+- Real-time fall incident detection
+- Demo video available in `FALL_DETECTION/fall_detection_assignment/demo_videos/videoplayback.mp4`
+
 ## Project Structure
 
 ```
-├── src/
-│   ├── parking_detector/      # Main package
-│   │   ├── __init__.py
-│   │   ├── config.py         # Configuration management
-│   │   ├── video_processor.py # Video processing
-│   │   ├── space_detector.py  # Parking space detection
-│   │   ├── classifier.py     # Space classification
-│   │   ├── detector.py       # YOLO vehicle detection
-│   │   ├── hybrid_detector.py # Combined detection system
-│   │   ├── visualizer.py     # Results visualization
-│   │   |── validation.py     # Accuracy validation
-|   |   |___app.py            # streamlit ui 
-│   ├── main.py               # Main detection script
-│   ├── validate_accuracy.py  # Validation script
-│   └── create_ground_truth.py # Annotation tool
-├── dataset/                   # Training data and models
-├── weights/                   # Model weights
-├── model/                     # Classifier model
-├── validation_results/        # Validation outputs
-├── requirements.txt          # Project dependencies
-└── README.md                # Project documentation
+├── src/                    # Parking Detection Implementation
+│   ├── parking_detector/   # Main package
+│   │   ├── config.py      # Configuration management
+│   │   ├── detector.py    # YOLO vehicle detection
+│   │   ├── classifier.py  # Space classification
+│   │   └── ...           # Other modules
+│   └── main.py           # Main detection script
+├── FALL_DETECTION/        # Fall Detection Implementation
+│   └── fall_detection_assignment/
+│       ├── scripts/       # Python implementation
+│       │   ├── fall_detection.py  # Core detection logic
+│       │   ├── demo.py           # Demo script
+│       │   └── streamlit_app.py  # UI implementation
+│       └── demo_videos/   # Example videos
+├── validation_results/    # Performance analysis
+└── docs/                 # Project documentation
 ```
 
 ## Features
 
+### Parking Detection
 - Hybrid detection combining:
   * Traditional computer vision for space detection
   * Pre-trained YOLO model for vehicle detection
@@ -57,91 +55,64 @@ Both components are documented below with their respective implementations and r
   * [Watch Demo Video](validation_results/streamlit-app-2025-04-10-04-04-64.webm)
 - Comprehensive validation framework
 - Configurable processing parameters
-- Ground truth annotation tool
 
-## Setup
+### Fall Detection
+- Custom YOLO model for human action recognition
+- Real-time fall incident detection
+- Features:
+  * Person detection and tracking
+  * Fall action classification
+  * Real-time alert system
+- Interactive Streamlit interface
+- Demonstration video included
 
-1. Create a virtual environment (recommended):
-```bash
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-# OR
-.\venv\Scripts\activate   # Windows
-```
+## Setup & Usage
 
-2. Install dependencies:
+### Parking Detection
+
+1. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-## Usage
-
-### Running Detection
-
-Process a video file:
+2. Run the detection:
 ```bash
 python src/main.py --video dataset/parking/parking_1920_1080.mp4 --mask dataset/parking/mask_1920_1080.png
 ```
 
-Optional arguments:
-- `--output`: Path for output video (default: output.mp4)
+### Fall Detection
 
-### Validation
-
-Run accuracy validation:
+1. Navigate to fall detection directory:
 ```bash
-# Extract frames and create ground truth
-python src/validate_accuracy.py --video <video_path> --mask <mask_path> --ground-truth <annotations_path>
+cd FALL_DETECTION/fall_detection_assignment
 ```
 
-Create ground truth annotations:
+2. Run the Streamlit app:
 ```bash
-python src/create_ground_truth.py --frames-dir <frames_dir> --mask <mask_path> --output <output_path>
+python -m streamlit run scripts/streamlit_app.py
 ```
 
 ## Configuration
 
-The system can be configured using environment variables or a .env file:
+The parking detection system can be configured using environment variables or a .env file:
 
 - `PARKING_DETECTOR_FRAME_SKIP`: Process every nth frame (default: 2)
 - `PARKING_DETECTOR_CONFIDENCE_THRESHOLD`: Detection confidence threshold (default: 0.7)
 - `PARKING_DETECTOR_IOU_THRESHOLD`: IoU threshold for overlap detection (default: 0.5)
 - `PARKING_DETECTOR_CLASSIFIER_WEIGHT`: Weight for classifier vs YOLO (default: 0.6)
 
-## Related Projects
+## Performance & Validation
 
-### Fall Detection System
-The fall detection implementation is maintained in a separate repository:
-- Location: `D:/fall_detection/`
-- Features:
-  * Custom YOLO model for human action detection
-  * Real-time fall incident recognition
-  * Demonstration video available at `D:/fall_detection/demo.mp4`
-
-## Future Enhancements
-
-While both main tasks have been completed successfully, there are potential areas for future enhancement:
-
-1. Task 2: Edge Device Deployment (on hold)
-   - Model optimization for resource-constrained devices
-   - Real-time processing on edge hardware
-   - Performance profiling and optimization
-   - Integration of both detection systems on edge devices
-
-2. System Integration
-   - Combining parking and fall detection into a unified surveillance system
-   - Shared notification and alerting system
-   - Integrated dashboard for all monitoring functions
-
-See [PROJECT_STATUS.md](PROJECT_STATUS.md) for detailed task status and implementation plans.
-
-## Validation Results
-
-The system has been validated against manually annotated ground truth data:
+### Parking Detection Results
 - 97.47% overall accuracy
 - Perfect recall (100%) - no missed occupied spaces
 - 92.42% precision - very few false positives
-- Detailed metrics available in [validation_results/analysis.md](validation_results/analysis.md)
+- Detailed metrics in [validation_results/analysis.md](validation_results/analysis.md)
+
+### Fall Detection Results
+- Successfully detects fall incidents in real-time
+- Tested with various scenarios and angles
+- Demo video showcases detection capabilities
 
 ## License
 
